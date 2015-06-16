@@ -57,10 +57,13 @@ class CAHNRSWP_Campaign_Progress_Widget extends WP_Widget {
     	<?php if ( $background_image ) : ?>
 				<img class="campaign-progress-background" src="<?php echo esc_url( $background_image[0] ); ?>" width="<?php echo esc_attr( $background_image[1] ); ?>" height="<?php echo esc_attr( $background_image[2] ); ?>">
 			<?php endif; ?>
-			<div class="campaign-progress-indicator" data-total="<?php echo $instance['total']; ?>" data-progress="<?php echo $instance['progress']; ?>" style="background: <?php echo ( $progress_background ) ? $progress_background : '#981e32'; ?>"></div>
+			<div class="campaign-progress-indicator" data-total="<?php echo $instance['total']; ?>" data-progress="<?php echo $instance['progress']; ?>" style="background: <?php echo ( $progress_background ) ? $progress_background : '#981e32'; ?>">
+				<p class="campaign-progress-amount-wrapper">$<span class="campaign-progress-amount">0</span></p>
+			</div>
 			<?php if ( $overlay_image ) : ?>
 				<img class="campaign-progress-overlay" src="<?php echo esc_url( $overlay_image[0] ); ?>" width="<?php echo esc_attr( $overlay_image[1] ); ?>" height="<?php echo esc_attr( $overlay_image[2] ); ?>">
 			<?php endif; ?>
+			<p class="campaign-total">$<?php echo $instance['total']; ?></p>
 		</div>
 		<?php
 		echo $args['after_widget'];

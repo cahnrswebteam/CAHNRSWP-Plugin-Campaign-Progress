@@ -8,10 +8,42 @@
 }
 .campaign-progress-indicator {
 	bottom: 0;
+	overflow: visible;
 	position: absolute;
 	width: 100%;
 }
 .campaign-progress-overlay {
 	display: block;
 	position: relative;
+}
+.campaign-progress-amount-wrapper {
+	background: #5e6a71;
+	color: #fff;
+	font-size: 0.95em;
+	font-weight: bold;
+	height: 1.4rem;
+	margin: 0;
+	padding: 0.2rem 1rem 0.2rem 1rem;
+	position: absolute;
+	top: -0.9rem; top: 0;
+	z-index: 1;
+}
+.campaign-progress-amount-wrapper:after {
+	/*border-bottom: 0.9rem solid transparent;
+	border-left: 1rem solid #5e6a71;
+	border-top: 0.9rem solid transparent;*/
+	border-bottom: 1.8rem solid transparent;
+	border-left: 1.8rem solid #5e6a71;
+	content: '';
+	height: 0;
+	position: absolute;
+	right: -1.8rem;
+	top: 0;
+	width: 0;
+}
+.campaign-total {
+	color: #981e32;
+	font-weight: bold;
+	top: 0;
+	position: absolute;
 }

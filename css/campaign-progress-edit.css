@@ -1,0 +1,33 @@
+.campaign-progress-display-options {
+	margin: 1em;
+}
+.campaign-progress-preview-container {
+	margin: 0 auto;
+	position: relative;
+	width: 50%;
+}
+.campaign-progress-background-preview,
+.campaign-progress-indicator-preview,
+.campaign-progress-overlay-preview {
+	height: auto;
+	width: 100%;
+}
+.campaign-progress-background-preview {
+	position: absolute;
+	top: 0;
+}
+.campaign-progress-preview-container .campaign-progress-indicator {
+	bottom: 0;
+	height: 50%;
+	overflow: hidden;
+	position: absolute;
+	width: 100%;
+}
+.campaign-progress-indicator-preview {
+	position: absolute;
+	width: 100%;
+}
+.campaign-progress-overlay-preview {
+	display: block;
+	position: relative;
+}

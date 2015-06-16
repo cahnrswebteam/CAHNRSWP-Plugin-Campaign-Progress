@@ -1,0 +1,17 @@
+.campaign-progress-container {
+	margin: 2rem 0;
+	position: relative;
+}
+.campaign-progress-background {
+	position: absolute;
+	top: 0;
+}
+.campaign-progress-indicator {
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+}
+.campaign-progress-overlay {
+	display: block;
+	position: relative;
+}

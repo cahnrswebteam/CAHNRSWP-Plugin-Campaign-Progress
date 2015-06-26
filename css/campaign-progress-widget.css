@@ -16,34 +16,33 @@
 	display: block;
 	position: relative;
 }
-.campaign-progress-amount-wrapper {
-	background: #5e6a71;
-	color: #fff;
-	font-size: 0.95em;
+.campaign-total {
+	color: #981e32;
+	font-size: 20px;
 	font-weight: bold;
-	height: 1.4rem;
-	margin: 0;
-	padding: 0.2rem 1rem 0.2rem 1rem;
+	padding: 0;
 	position: absolute;
-	top: -0.9rem; top: 0;
-	z-index: 1;
+	top: -25px;
+}
+.campaign-progress-amount-wrapper {
+	background: rgba( 94, 106, 113, 0.95 );
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	height: 12px;
+	line-height: 1;
+	margin: 0;
+	padding: 8px 16px 8px 16px;
+	position: absolute;
+	top: 0;
 }
 .campaign-progress-amount-wrapper:after {
-	/*border-bottom: 0.9rem solid transparent;
-	border-left: 1rem solid #5e6a71;
-	border-top: 0.9rem solid transparent;*/
-	border-bottom: 1.8rem solid transparent;
-	border-left: 1.8rem solid #5e6a71;
+	border-top: 28px solid transparent;
+	border-left: 28px solid rgba( 94, 106, 113, 0.95 );
 	content: '';
 	height: 0;
 	position: absolute;
-	right: -1.8rem;
+	right: -28px;
 	top: 0;
 	width: 0;
-}
-.campaign-total {
-	color: #981e32;
-	font-weight: bold;
-	top: 0;
-	position: absolute;
 }

@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 
-	var campaignTotal    = parseInt( $('.campaign-progress-indicator').attr('data-total') ),
-			campaignProgress = parseInt( $('.campaign-progress-indicator').attr('data-progress') ),
+	var campaignTotal    = parseInt( $('.campaign-progress-amount').attr('data-total') ),
+			campaignProgress = parseInt( $('.campaign-progress-amount').attr('data-progress') ),
 			percent = ~~( ( campaignProgress / campaignTotal  ) * 100 );
 
 	$('.campaign-progress-indicator').animate( { height: percent + "%" }, 2500 );

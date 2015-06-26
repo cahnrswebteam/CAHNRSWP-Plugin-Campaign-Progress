@@ -2,7 +2,7 @@
 	margin: 1em;
 }
 .campaign-progress-preview-container {
-	margin: 0 auto;
+	margin: 2rem auto;
 	position: relative;
 	width: 50%;
 }
@@ -30,4 +30,35 @@
 .campaign-progress-overlay-preview {
 	display: block;
 	position: relative;
+}
+.campaign-total {
+	color: #981e32;
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: -25px;
+}
+.campaign-progress-amount-wrapper {
+	background: rgba( 94, 106, 113, 0.95 );
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+	height: 12px;
+	line-height: 1;
+	margin: 0;
+	padding: 8px 16px 8px 16px;
+	position: absolute;
+	top: 0;
+}
+.campaign-progress-amount-wrapper:after {
+	border-top: 28px solid transparent;
+	border-left: 28px solid rgba( 94, 106, 113, 0.95 );
+	content: '';
+	height: 0;
+	position: absolute;
+	right: -28px;
+	top: 0;
+	width: 0;
 }

@@ -45,25 +45,28 @@ class CAHNRSWP_Campaign_Progress_Widget extends WP_Widget {
 				$progress_background = $instance['progress_background'];
 			} else {
 				$image = wp_get_attachment_image_src( $instance['progress_background'], 'full' );
-				$progress_background = 'url(' . $image[0] . ') no-repeat bottom left';
+				$progress_background = 'url(' . esc_url( $image[0] ) . ') no-repeat bottom left';
 			}
 		}
 		
 		
 		echo $args['before_widget'];
 		?>
-		<h2><?php echo $instance['title']; ?></h2>
+		<h2><?php echo esc_html( $instance['title'] ); ?></h2>
 		<div class="campaign-progress-container">
     	<?php if ( $background_image ) : ?>
 				<img class="campaign-progress-background" src="<?php echo esc_url( $background_image[0] ); ?>" width="<?php echo esc_attr( $background_image[1] ); ?>" height="<?php echo esc_attr( $background_image[2] ); ?>">
 			<?php endif; ?>
-			<div class="campaign-progress-indicator" data-total="<?php echo $instance['total']; ?>" data-progress="<?php echo $instance['progress']; ?>" style="background: <?php echo ( $progress_background ) ? $progress_background : '#981e32'; ?>">
-				<p class="campaign-progress-amount-wrapper">$<span class="campaign-progress-amount">0</span></p>
-			</div>
+			<div class="campaign-progress-indicator" style="background: <?php echo ( $progress_background ) ? $progress_background : '#981e32'; ?>; width: <?php echo esc_attr( $overlay_image[1] ); ?>;"></div>
 			<?php if ( $overlay_image ) : ?>
 				<img class="campaign-progress-overlay" src="<?php echo esc_url( $overlay_image[0] ); ?>" width="<?php echo esc_attr( $overlay_image[1] ); ?>" height="<?php echo esc_attr( $overlay_image[2] ); ?>">
 			<?php endif; ?>
-			<p class="campaign-total">$<?php echo $instance['total']; ?></p>
+			<p class="campaign-total">$<?php echo esc_html( $instance['total_display'] ); ?></p>
+			<div class="campaign-progress-indicator" style="padding-bottom: 28px; width: <?php echo esc_attr( $overlay_image[1] ); ?>;">
+				<p class="campaign-progress-amount-wrapper">
+					$<span class="campaign-progress-amount" data-total="<?php echo esc_attr( $instance['total'] ); ?>" data-progress="<?php echo esc_attr( $instance['progress'] ); ?>">0</span>
+				</p>
+			</div>
 		</div>
 		<?php
 		echo $args['after_widget'];
@@ -76,23 +79,25 @@ class CAHNRSWP_Campaign_Progress_Widget extends WP_Widget {
 		$title = ! empty( $instance['title'] ) ? $instance['title'] : '';
 		$total = ! empty( $instance['total'] ) ? $instance['total'] : '';
 		$progress = ! empty( $instance['progress'] ) ? $instance['progress'] : '';
-		
+		$total_display = ! empty( $instance['total_display'] ) ? $instance['total_display'] : '';
 		$overlay_image = ! empty( $instance['overlay_image'] ) ? $instance['overlay_image'] : '';
 		$progress_background = ! empty( $instance['progress_background'] ) ? $instance['progress_background'] : '#981e32';
 		$background_image = ! empty( $instance['background_image'] ) ? $instance['background_image'] : '';
-		//$show_total = ! empty( $instance['show_total'] ) ? $instance['show_total'] : '';
-		//$show_progress = ! empty( $instance['show_progress'] ) ? $instance['show_progress'] : '';
 		?>
 		<p><label for="<?php echo $this->get_field_id( 'title' ); ?>">Title</label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>"></p>
-		<p><label for="<?php echo $this->get_field_id( 'total' ); ?>">Campaign Total (<span class="description">no commas</span>)</label>
+		<p><label for="<?php echo $this->get_field_id( 'total' ); ?>">Campaign Total (<span class="description">full number without commas</span>)</label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'total' ); ?>" name="<?php echo $this->get_field_name( 'total' ); ?>" type="text" value="<?php echo esc_attr( $total ); ?>"></p>
-    <p><label for="<?php echo $this->get_field_id( 'progress' ); ?>">Campaign Progress (<span class="description">no commas</span>)</label>
+    <p><label for="<?php echo $this->get_field_id( 'progress' ); ?>">Campaign Progress (<span class="description">full number without commas</span>)</label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'progress' ); ?>" name="<?php echo $this->get_field_name( 'progress' ); ?>" type="text" value="<?php echo esc_attr( $progress ); ?>"></p>
 
 		<p>Display</p>
 
 		<ul class="campaign-progress-display-options">
+			<li>
+				<label for="<?php echo $this->get_field_id( 'total_display' ); ?>">Campaign Total (<span class="description">example: X Million</span>)</label>
+				<input class="widefat" id="<?php echo $this->get_field_id( 'total_display' ); ?>" name="<?php echo $this->get_field_name( 'total_display' ); ?>" type="text" value="<?php echo esc_attr( $total_display ); ?>">
+			</li>
 			<li class="upload-set-wrapper">
 				<input type="hidden" class="campaign-progress-upload" name="<?php echo $this->get_field_name( 'overlay_image' ); ?>" id="<?php echo $this->get_field_id( 'overlay_image' ); ?>" value="<?php echo esc_attr( $overlay_image ); ?>" />
       	Overlay Image: <span class="hide-if-no-js campaign-progress-set-link"><a class="campaign-progress-overlay" href="#">Set</a></span>
@@ -108,11 +113,9 @@ class CAHNRSWP_Campaign_Progress_Widget extends WP_Widget {
 				Background Image: <span class="hide-if-no-js campaign-progress-set-link"><a class="campaign-progress-background" href="#">Set</a></span>
         <span class="hide-if-no-js campaign-progress-remove-link"<?php if ( ! $background_image ) { echo ' style="display: none;"'; } ?>><a class="campaign-progress-background" title="Remove" href="#">Remove</a></span>
 			</li>
-			<!--<li><input type="checkbox" /> Show total amount</li>-->
-			<!--<li><input type="checkbox" /> Show progress amount</li>-->
 		</ul>
 
-		<p>Preview</p>
+		<p>Preview (<span class="description">at 50% progress</span>)</p>
 		<div class="campaign-progress-preview-container">
 
 			<?php if ( $background_image ) : ?>
@@ -126,7 +129,7 @@ class CAHNRSWP_Campaign_Progress_Widget extends WP_Widget {
       	if ( $progress_background ) {
 					if ( strpos( $progress_background, '#' ) === false ) {
 						$image = wp_get_attachment_image_src( $progress_background, 'full' );
-						$background = 'url(' . $image[0] . ') no-repeat';
+						$background = 'url(' . esc_url( $image[0] ) . ') no-repeat';
 					} else { 
 						$background = $progress_background;
 					}
@@ -141,6 +144,14 @@ class CAHNRSWP_Campaign_Progress_Widget extends WP_Widget {
 				<span class="campaign-progress-overlay-placeholder"></span>
 			<?php endif; ?>
 
+			<p class="campaign-total">$<?php echo ( $instance['total_display'] ) ? esc_html( $instance['total_display'] ) : 'XXXXXX'; ?></p>
+
+			<div class="campaign-progress-indicator" style="padding-bottom: 28px; width: <?php echo esc_attr( $overlay_image[1] ); ?>;">
+				<p class="campaign-progress-amount-wrapper">
+					$<span class="campaign-progress-amount"><?php echo ( $instance['total'] ) ? esc_html( $instance['total'] / 2 ) : 'XXXXXX'; ?></span>
+				</p>
+			</div>
+
 		</div>
 
 		<?php
@@ -151,8 +162,10 @@ class CAHNRSWP_Campaign_Progress_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
+		$instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 		$instance['total'] = ( ! empty( $new_instance['total'] ) ) ? strip_tags( $new_instance['total'] ) : '';
 		$instance['progress'] = ( ! empty( $new_instance['progress'] ) ) ? strip_tags( $new_instance['progress'] ) : '';
+		$instance['total_display'] = ( ! empty( $new_instance['total_display'] ) ) ? strip_tags( $new_instance['total_display'] ) : '';
 		$instance['overlay_image'] = ( ! empty( $instance['overlay_image'] ) ) ? strip_tags( $new_instance['overlay_image'] ) : '';
 		$instance['progress_background'] = ( ! empty( $instance['progress_background'] ) ) ? strip_tags( $new_instance['progress_background'] ) : '#981e32';
 		$instance['background_image'] = ( ! empty( $instance['background_image'] ) ) ? strip_tags( $new_instance['background_image'] ) : '';
